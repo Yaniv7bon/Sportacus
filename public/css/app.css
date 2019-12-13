@@ -1,0 +1,54 @@
+
+/*div.container, div.container-fluid {
+    margin-top:20px;
+}
+
+div.new-title{
+    padding:2em;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.new-title h1, div.new-title p{
+    color: white;
+    text-shadow : 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+div.carousel-caption{
+    text-shadow : 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+.avatar{
+    max-width: 128px;
+    max-height: 128px;
+    border-radius:50%;
+}
+
+.avatar-medium{
+    max-width: 80px;
+    max-height:80px;
+}
+.avatar-mini{
+    max-width: 30px;
+    max-height:30px;
+}
+.avatar-micro{
+    max-width: 20px;
+    max-height:20px;
+}
+
+span.rating i{
+    color :#4582ec;
+}*/
+
+body{
+  background:url(../img/sport4.jpg) no-repeat ;
+  background-size: cover;
+}
+
+.avatar{
+    max-width: 128px;
+    max-height: 128px;
+    border-radius:50%;
+    border: 3px solid black;
+}

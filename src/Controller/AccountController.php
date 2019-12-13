@@ -27,29 +27,29 @@ class AccountController extends AbstractController
      */
     public function register(EntityManagerInterface $manager,Request $request,UserPasswordEncoderInterface $encoder)
     {   
-        $user = new User();
-        $form = $this->createForm(RegistrationType::class,$user);
+        $user = new User(); #Crée un nouvel utilisateur 
+        $form = $this->createForm(RegistrationType::class,$user); #Crée formulaire d'inscription
 
-        $form->handleRequest($request);
+        $form->handleRequest($request); #Permet à symfony d'affecter les infos du formulaire à l'user crée precedement 
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $hash = $encoder->encodePassword($user,$user->getPassword());
+            $hash = $encoder->encodePassword($user,$user->getPassword()); #Encode le password avant de l'envoyer en BDD
             $user->setPassword($hash);
 
-            $manager->persist($user);
-            $manager->flush();
+            $manager->persist($user); #Enregistre les modifs de l'user
+            $manager->flush(); #Envoi en BDD le nouvel user créer
 
-            $this->addFlash(
+            $this->addFlash( 
                 'success',
                 'Votre compte a bien été crée ! Vous pouvez maintenant vous connectez !'
-            );
+            ); #Message de succes
 
             return $this->redirectToRoute("account_login");
         }
 
         return $this->render('account/registration.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView() #Affiche le formulaire dans twig
         ]);
     }
 
@@ -59,8 +59,11 @@ class AccountController extends AbstractController
      * @Route("/login", name="account_login")
      * 
      */
-    public function login(AuthenticationUtils $utils)
-    {
+    public function login(AuthenticationUtils $utils) 
+    {   
+        #On utilise ici une classe de symfony permettant notemment
+        #de recuper les erreurs ayant lieu lors d'une tentative de connexion,
+        #ou enregistrant le dernier identifiant tapper
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
 
