@@ -87,7 +87,39 @@ class AccountController extends AbstractController
 
     }
    
-    
+    /**
+     * Formulaire de modification des infos sportives
+     * 
+     * @Route("/account/change", name="account_change")
+     * 
+     * 
+     * @return Response
+     */
+    public function change(Request $request,EntityManagerInterface $manager)
+    {   
+        $infos = $this->getUser()->getUserTraining();
+        $form = $this->createForm(UserTrainingType::class,$infos);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($infos);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Votre profil sportif a bien été mis à jour ! Nous allons générer un nouveau programme vous correspondant !"
+
+            );
+            return $this->redirectToRoute("training_auto");
+        }
+
+        return $this->render("account/change.html.twig",[
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * Profil utilisateur
      * 
@@ -97,16 +129,16 @@ class AccountController extends AbstractController
      */
     public function myAccount(EntityManagerInterface $manager,Request $request)
     {   
-        $habits = new UserTraining();
-        $form = $this->createForm(UserTrainingType::class, $habits);
+        $infos = new UserTraining();
+        $form = $this->createForm(UserTrainingType::class, $infos);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $habits->setUser($this->getUser());
+            $infos->setUser($this->getUser());
 
-            $manager->persist($habits);
+            $manager->persist($infos);
             $manager->flush();
 
             $this->addFlash(
@@ -120,6 +152,17 @@ class AccountController extends AbstractController
             'user' => $this->getUser(),
             'form' => $form->createView()
         ]);
+    }
+    /**
+     * Affiche page d'accueil
+     * 
+     * @Route("/", name="home")
+     *
+     * @return Response
+     */
+    public function home()
+    {
+        return $this->render('home/home.html.twig');
     }
 
     /**
@@ -159,7 +202,7 @@ class AccountController extends AbstractController
             ];
         }
         else{
-            $exoPram = [
+            $exoParam = [
                 'series' => 4,
                 'reps' => 12,
                 'repos' => 1

@@ -16,8 +16,8 @@
 
 				</div>
 				<div class="bg-light py-3 px-3   text-center">
-				<span>Voici votre programme généré automatiquement !</span><br>
-				<span> Vous souhaitez plutot le réalisez vous-même ? Cliquez-ici ! </span>
+				<span> Vous souhaitez modifier votre profil sportif ? <a href="{{path("account_change")}}">Cliquez-ici !</a></span><br>
+				<span> Vous souhaitez réalisez votre programme vous-même ? <a href="#">Cliquez-ici !</a></span> </span>
 				{% for i in 1..jours %}
 					<h3 style="text-decoration: underline;">Jour {{i}}</h3>
 				{% for exo in exos %}
