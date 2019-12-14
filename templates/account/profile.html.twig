@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre profil
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">&nbsp;</div>
+			<div class="col-md-6">
+				<div class="bg-transparent py-3 px-3  mt-5 text-center">
+					<img src="{{user.picture}}" class="avatar mx-auto" alt=""><br>
+					<h1 style="color:white; background-color:black; display:inline-block">{{user.firstName}}</h1>
+
+				</div>
+				<div class="bg-light py-3 px-3   text-center">
+				<h5>Ce formulaire nous permettra de te concocter un programme sur mesure !</h5>
+                    {{form_start(form)}}
+                    {{form_widget(form)}}
+                <button type="submit" class="btn btn-primary">Commencez votre transformation !</button>
+                    {{form_end(form)}}
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
