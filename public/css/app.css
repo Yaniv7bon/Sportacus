@@ -52,3 +52,9 @@ body{
     border-radius:50%;
     border: 3px solid black;
 }
+
+
+.avatar-mini{
+    max-width: 30px;
+    max-height:30px;
+}

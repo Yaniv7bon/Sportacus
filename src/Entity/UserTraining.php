@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 //Represente les informations servant de base 
-//à la realisation du programme d'un utilsateur 
+//à la realisation du programme d'un utilsateura 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserTrainingRepository")
@@ -109,4 +109,5 @@ class UserTraining
 
         return $this;
     }
+
 }

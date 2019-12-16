@@ -183,6 +183,7 @@ class AccountController extends AbstractController
         $exos = $repoExo->findBy(['Type' => $userParam->getTrainingType(), 'Level' => $userParam->getTrainingLevel()],null,$limit,null);
         dump($exos);
 
+        $exosArray =[];
         foreach($exos as $exo){
 
         if($userParam->getTrainingLevel() == "Debutant")
@@ -212,7 +213,7 @@ class AccountController extends AbstractController
         $exosArray[] = $exo;
         
     }
-    dump($exosArray);
+    
 
 
        return $this->render('account/training.html.twig',[
@@ -221,4 +222,20 @@ class AccountController extends AbstractController
            'jours' => (int)$userParam->getTrainingFrequency()
        ]);
     }
+
+
+
+ /**
+     * Affiche page partage
+     * 
+     * @Route("/social/zone_publique", name="zone_publique")
+     *
+     * @return Response
+     */
+    public function partage()
+    {
+        return $this->render('social/zone_publique.html.twig');
+    }
+
+
 }

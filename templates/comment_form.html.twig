@@ -1,0 +1,49 @@
+
+<div class="container-fluid">
+    
+    <form class="comment-form" method="post" action="{{ site.site_url~'/wp-comments-post.php' }}">
+        {% if  user %}
+
+            <input type="hidden" name="email" value="{{ user.email }}">
+            <input type="hidden" name="author" value="{{ user.firstName }}">
+            <input type="hidden" name="url" value="{{ user.id }}">
+
+        {% else %}
+
+		<div class="row">
+		<div class="col-xl-4"></div>
+            <label>Email<br>
+                <input required name="email" type="email" id="email">
+            </label>
+			<div class="col-xl-4"></div>
+			</div>
+
+			<div class="row">
+			<div class="col-xl-4"></div>
+            <label>Nom<br>
+                <input required name="author" type="text">
+            </label>
+			<div class="col-xl-4"></div>
+			</div>
+           
+        {% endif %}
+
+		<div class="row">
+		<div class="col-xl-4"></div>
+        <label>Commentaire<br>
+            <textarea placeholder="Laissez un commentaire..." name="comment" cols="60" rows="4"></textarea>
+        </label>
+        <input name="comment_post_ID" value="{{ post.id }}" type="hidden">
+        <input name="comment_parent"  value="{{ comment.ID|default('0') }}" type="hidden">
+		</div>
+		<div class="col-xl-4"></div>
+
+		<div class="row">
+		<div class="col-xl-4"></div>
+        <button type="submit" name="Submit" class="btn-btn">Commentez</button>
+		<div class="col-xl-4"></div>
+		</div>
+    </form>
+
+
+</div>
