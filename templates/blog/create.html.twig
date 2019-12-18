@@ -1,0 +1,35 @@
+{% extends "blog_base.html.twig" %}
+
+
+{% block body %}
+    
+<h1>
+{% if editMode %}
+Modifier l'article
+{% else %}
+Création d'un article
+{% endif %} </h1>
+
+
+{{ form_start(formArticle)}}
+
+{# {{ form_error(formArticle.title) }} #}
+{{ form_row(formArticle.title, {'attr': {'placeholder': "Titre de l'article"}}) }}
+
+{{ form_row(formArticle.content, {'attr': {'placeholder' : "Contenu de l'article"}}) }}
+
+{{ form_row(formArticle.image, {'attr': {'placeholder' : "URL de l'image"}}) }}
+
+<button type="submit" class="btn btn-success">
+{% if editMode %}
+Modifier l'article
+{% else %}
+Ajouter l'article</button>
+{% endif %}
+
+{{ form_end(formArticle)}}
+
+
+
+
+{% endblock %}

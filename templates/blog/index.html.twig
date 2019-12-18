@@ -1,0 +1,24 @@
+{% extends 'blog_base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+
+<section class="article">
+
+{% for article in articles %}
+
+<article>
+    <h2 class="py-3">{{ article.title }}</h2>
+    <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie Nutrition</div>
+    <div class="content"></div>
+    <img src="{{ article.image }}" alt="" class="py-3">
+    <br>
+    <a href="{{ path('blog_show', {'id': article.id }) }}" class="btn btn-primary py-3 px-3">Lire l'article</a>
+</article>
+
+{% endfor %}
+
+</section>
+
+{% endblock %}

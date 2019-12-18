@@ -8,16 +8,20 @@
 <h4>Partagez votre passion !</h4>
 <br>
 
+
 {#
 <p>{{ app.user.firstName }} a partagé ce programme : </p>
  {{ app.user.program }} 
  #}
 
 
-
 {# COMMENT SECTION #}
 
-{% include 'comment_form.html.twig' %}
+{{ form_start(post_form) }}
+
+{{ form_widget(post_form) }}
+
+{{ form_end(post_form) }}
 
 
 </div>
