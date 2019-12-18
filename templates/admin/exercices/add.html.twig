@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajouter un exercice !{% endblock %}
+
+{% block body %}
+<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">&nbsp;</div>
+			<div class="col-md-6">
+            <div class="bg-light py-3 px-3  mt-5">
+					<h1>Ajoutez un nouvel exercice</h1>
+
+					{{form_start(form)}}
+					{{form_widget(form)}}
+					<button type="submit" class="btn btn-primary">Enregistrer</button>
+					{{form_end(form)}}
+                    </div>
+				</div>
+			</div>
+         
+        </div>
+    </div>
+
+{% endblock %}
+

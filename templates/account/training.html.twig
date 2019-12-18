@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre profil
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">&nbsp;</div>
+			<div class="col-md-6">
+				<div class="bg-transparent py-3 px-3  mt-5 text-center">
+					<img src="{{user.picture}}" class="avatar mx-auto" alt=""><br>
+					<h1 style="color:white; background-color:black; display:inline-block">{{user.firstName}}</h1>
+
+				</div>
+				<div class="bg-light py-3 px-3   text-center">
+				<span> Vous souhaitez modifier votre profil sportif ? <a href="{{path("account_change")}}">Cliquez-ici !</a></span><br>
+				<span> Vous souhaitez réalisez votre programme vous-même ? <a href="#">Cliquez-ici !</a></span> </span>
+				{% for i in 1..jours %}
+					<h3 style="text-decoration: underline;">Jour {{i}}</h3>
+				{% for exo in exos %}
+					<h5><strong>{{exo.groupeMusculaire}}</strong></h5>
+					<div class="text-left px-5">
+					<span><strong style="font-weight: bold;">Exercice :</strong> {{exo.name}}</span><br>
+					<span><strong style="font-weight: bold;">Séries :</strong> {{exo.series}} * {{exo.reps}} répétitions</span><br>
+					<span><strong style="font-weight: bold;">Repos :</strong> {{exo.repos}} minutes</span><br>
+					</div>
+					{% endfor %}
+				{% endfor %}
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

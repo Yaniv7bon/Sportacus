@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="mt-5 mb-2">Gestion des exercices</h1>
+    <a href="{{path("admin_exo_add")}}" class="btn btn-primary float-right mb-2">
+        <i class="fas fa-plus"></i>
+        Ajouter un exercice
+    </a>
+    <table class="table">
+        <thead class="text-primary">
+            <tr bgcolor="#ddd">
+                <th>Exercice</th>
+                <th>Groupe musculaire</th>
+                <th>Niveau</th>
+                <th>Type d'entrainement</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-primary">
+            {% for exo in exos %}
+            <tr bgcolor="#cbcbcb">
+               <td>{{exo.name}}</td>
+               <td>{{exo.groupemusculaire}}</td>
+               <td>{{exo.level}}</td>
+               <td>{{exo.type}}</td>
+               <td>
+                <a href="{{path("admin_exo_delete" , {'id':exo.id})}}" onclick="return confirm(`Voulez-vous vraiment supprimer l'exercice : {{exo.name}} ?`)">
+                    <i class="fas fa-trash"></i>
+                </a>
+               </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

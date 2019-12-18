@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des utilisateurs</h1>
+    <table class="table">
+        <thead class="text-primary">
+            <tr bgcolor="#ddd">
+                <th>Nom</th>
+                <th>Niveau</th>
+                <th>Type d'entrainement</th>
+                <th>Fréquence</th>
+                <th>Ville</th>
+            </tr>
+        </thead>
+        <tbody class="text-primary">
+            {% for user in users %}
+            {% set u = user %}
+            <tr bgcolor="#cbcbcb">
+                {% if u.getUserTraining is not null %}
+                    <td>
+                    <img src="{{u.picture}}" class="avatar avatar-medium white">
+                    {{u.fullName}}
+                    </td>
+                    <td>{{u.UserTraining.TrainingLevel}}</td>
+                    <td>{{u.UserTraining.TrainingType}}</td>
+                    <td>{{u.UserTraining.TrainingFrequency}} fois / semaine</td>
+                    <td>{{u.UserTraining.city}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
