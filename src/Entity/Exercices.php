@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\UserTrainingType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +41,8 @@ class Exercices
     {
         return get_object_vars($this);
     }
+
+
     public function getId(): ?int
     {
         return $this->id;

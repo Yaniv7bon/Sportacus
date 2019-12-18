@@ -58,3 +58,14 @@ body{
     max-width: 30px;
     max-height:30px;
 }
+
+.avatar-medium{
+    max-width: 50px;
+    max-height:50px;
+}
+
+.white
+{
+    border: 3px solid white;
+ 
+}

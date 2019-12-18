@@ -7,11 +7,12 @@ use App\Entity\UserTraining;
 use App\Form\RegistrationType;
 use App\Form\UserTrainingType;
 use App\Repository\ExercicesRepository;
-use App\Repository\UserTrainingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserTrainingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -91,7 +92,7 @@ class AccountController extends AbstractController
      * Formulaire de modification des infos sportives
      * 
      * @Route("/account/change", name="account_change")
-     * 
+     * @IsGranted("ROLE_USER")
      * 
      * @return Response
      */
@@ -124,7 +125,8 @@ class AccountController extends AbstractController
      * Profil utilisateur
      * 
      * @Route("/account", name="account_index")
-     *
+     * @IsGranted("ROLE_USER")
+     * 
      * @return Response
      */
     public function myAccount(EntityManagerInterface $manager,Request $request)
@@ -169,7 +171,7 @@ class AccountController extends AbstractController
      * Génére un programme automatiquement en fonction des infos du formulaire
      * 
      * @Route("/account/training",name="training_auto")
-     *
+     * @IsGranted("ROLE_USER")
      * @return void
      */
     public function automaticTraining(UserTrainingRepository $repo, ExercicesRepository $repoExo)
@@ -183,38 +185,38 @@ class AccountController extends AbstractController
         $exos = $repoExo->findBy(['Type' => $userParam->getTrainingType(), 'Level' => $userParam->getTrainingLevel()],null,$limit,null);
         dump($exos);
 
-        $exosArray =[];
-        foreach($exos as $exo){
+        foreach($exos as $exo)
+        {
+            if($userParam->getTrainingLevel() == "Debutant")
+	        {
+	            $exoParam = [
+	                'series' => 2,
+	                'reps' => 8,
+	                'repos' => 3
+	            ];
+	        }
+	        elseif($userParam->getTrainingLevel() =="Intermediaire")
+	        {
+	            $exoParam = [
+	                'series' => 3,
+	                'reps' => 10,
+	                'repos' => 2
+	            ];
+	        }
+	        else{
+	            $exoParam = [
+	                'series' => 4,
+	                'reps' => 12,
+	                'repos' => 1
+	            ];
+	        }
+	        $exo = array_merge($exo->getArray(),$exoParam);
+	        $exosArray[] = $exo;
 
-        if($userParam->getTrainingLevel() == "Debutant")
-        {
-            $exoParam = [
-                'series' => 2,
-                'reps' => 8,
-                'repos' => 3
-            ];
+           
         }
-        elseif($userParam->getTrainingLevel() =="Intermediaire")
-        {
-            $exoParam = [
-                'series' => 3,
-                'reps' => 10,
-                'repos' => 2
-            ];
-        }
-        else{
-            $exoParam = [
-                'series' => 4,
-                'reps' => 12,
-                'repos' => 1
-            ];
-        }
-        $exo = array_merge($exo->getArray(),$exoParam);
-        $exosArray[] = $exo;
-        
-    }
+
     
-
 
        return $this->render('account/training.html.twig',[
            'user' => $this->getUser(),
