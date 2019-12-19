@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{%  block title %}
+	Page d'accueil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">&nbsp;</div>
+			<div class="col-md-6">
+				<h1>Bienvenue sur Sportacus </h1>
+				<div class="bg-light py-3 px-3 text-center">
+				
+				<p>Sportacus vous accompagne tout au long de votre parcours sportif de remise en forme.</p>
+                <p>Soyez maître de votre propre programme que vous pouvez créer sur mesure, ou optez pour nos programmes suivis par nos coachs.</p>
+                <p>Vous aussi entrez dans l'arène et participez au combat,<a class="nav-link" href="{{path("account_register")}}">Cliquez ici !</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>{% endblock %}
